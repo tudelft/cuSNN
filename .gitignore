@@ -1,0 +1,7 @@
+/build/
+/cmake-build-debug/
+/.idea/
+*.trace
+*.a
+*.ppm
+.project
