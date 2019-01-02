@@ -1,0 +1,3 @@
+[submodule "cuSNN-samples"]
+	path = cuSNN-samples
+	url = https://github.com/tudelft/cuSNN-samples.git
