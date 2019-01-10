@@ -1064,7 +1064,8 @@ void Network::summary() {
     printf("Input \t\t\t (%i, %i, %i)\n", this->h_inp_size[0], this->h_inp_size[1], this->h_inp_size[2]);
     printf("----------------------------------------------------------\n");
     for (int l = 0; l < this->cnt_layers; l++) {
-        int params = (this->h_layers[l]->rf_side - this->h_layers[l]->rf_side_limits[0]) * 
+        int params = this->h_layers[l]->inp_size[0] *
+                (this->h_layers[l]->rf_side - this->h_layers[l]->rf_side_limits[0]) *
                 (this->h_layers[l]->rf_side - this->h_layers[l]->rf_side_limits[1]) * this->h_layers[l]->num_delays;
         for (int k = 0; k < this->h_layers[l]->cnt_kernels; k++) {
             if (!this->h_layers[l]->h_kernels_cnvg[k] && this->h_layers[l]->enable_learning) trainable += params;
