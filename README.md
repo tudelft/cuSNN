@@ -40,6 +40,8 @@ In cuSNN, a SNN is defined using the following host/device classes:
 | Network -> **Layer** 	|  *Kernel* object and layer parameters.        	|
 | Network -> Layer -> **Kernel**    |  Neural and synaptic parameters. 	|
 
+The cuSNN library has been tested on Linux systems only.
+
 #### Layer Types
 
 * **Conv2d**: 2D convolution over an input neural map composed of several input channels.
@@ -70,8 +72,8 @@ At the moment, only the following learning rules are implemented:
 
 **Requirements**:
 
-* [**CMake**](https://cmake.org/) **3.8** or higher
-* [**NVIDIA CUDA Toolkit**](https://developer.nvidia.com/cuda-toolkit) **8.0** (or newer)
+* [**CMake**](https://cmake.org/) **3.8** (or higher)
+* [**NVIDIA CUDA Toolkit**](https://developer.nvidia.com/cuda-toolkit) **8.0** (or higher)
 
 **Get the cuSNN source**:
 ```
