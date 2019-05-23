@@ -21,9 +21,7 @@ class Kernel {
 
         // output map data
         int *h_node_train;
-        float *h_node_posttrace;
         int *d_node_train;
-        float *d_node_posttrace;
 
         int *h_nodesep_train;
         float *h_nodesep_V;
@@ -61,6 +59,10 @@ class Kernel {
         float *d_weights_inh;
         float *d_weights_inh_delta;
 
+        // exc + beta * inh
+        float *h_weights_total;
+        float *d_weights_total;
+
         // learning params
         bool learning_trigger;
         bool *d_weights_delta_maps;
@@ -75,10 +77,6 @@ class Kernel {
         float *h_stdp_paredes_objective;
         float *d_stdp_paredes_objective;
         float *d_stdp_paredes_objective_avg;
-
-        // Diehl's adaptive threshold
-        float *h_threshold_diehl_nodesep_theta;
-        float *d_threshold_diehl_nodesep_theta;
 
         /* FUNCTIONS */
         Kernel(int out_node_kernel, int out_nodesep_kernel, int out_maps, int length_delay_out, float node_refrac,
@@ -177,10 +175,6 @@ class Layer {
         // Gerstner's STDP params
         bool stdp_gerstner_weight_dependence;
 
-        // Diehl's adaptive threshold
-        bool threshold_diehl;
-        float threshold_diehl_increase;
-
         // layers
         Kernel** h_kernels;
         Kernel** h_d_kernels;
@@ -203,7 +197,8 @@ class Network {
     public:
 
         // number of layers
-        int cnt_layers;
+        int *h_cnt_layers;
+        int *d_cnt_layers;
 
         // input size
         int *h_inp_size;
@@ -235,6 +230,16 @@ class Network {
         bool learning;
         int learning_type;
 
+        // histograms
+        int *h_histogram;
+        int *d_histogram;
+        int *h_histogram_SPM;
+        int *d_histogram_SPM;
+        int *h_histogram_type;
+        int *d_histogram_type;
+        int length_histogram;
+        int length_histogram_SPM;
+
         // CUDA blocks and threads dimensions
         int max_inputs;
         int max_channels;
@@ -258,7 +263,8 @@ class Network {
 
         /* FUNCTIONS */
         Network(const int inp_size[3], const float inp_scale[2], const float sim_step, float node_refrac,
-                float synapse_trace_init, bool inhibition, bool drop_delays, float drop_delays_th);
+                float synapse_trace_init, bool inhibition, bool drop_delays, float drop_delays_th,
+                const int histogram_type);
         ~Network();
 
         void add_layer(std::string layer_type, bool learning, bool load_weights, bool homeostasis, float Vth,
@@ -266,7 +272,6 @@ class Network {
                        float synapse_inh_scaling = 0.f, int rf_side = 7, int out_channels = 8,
                        std::string padding = "none", float w_init = 0.5f);
         void create_network(bool& break_fun);
-        void enable_adaptive_threshold_diehl(float threshold_delta, bool& break_fun);
         void enable_stdp_paredes(float learning_rate, float scale_a, float convg_th, int limit_updates,
                                  bool inhibition_spatial, int stats_window, bool& break_fun);
         void enable_stdp_shrestha(float learning_rate, float window_LTP, bool weight_boundaries, float weight_max,
@@ -286,6 +291,7 @@ class Network {
 
         void feed(bool& break_fun);
         void update_input();
+        void update_SPM();
         void copy_to_host();
         void summary();
         void init();
