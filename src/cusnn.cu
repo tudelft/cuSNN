@@ -16,7 +16,7 @@
 // constructor
 Network::Network(const int inp_size[3], const float inp_scale[2], const float sim_step, float node_refrac,
                  float synapse_trace_init, bool inhibition, bool drop_delays, float drop_delays_th,
-                 const int histogram_type) {
+                 int histogram_type) {
 
     this->h_cnt_layers = (int *) malloc(sizeof(int));
     cudaMalloc((void **)&this->d_cnt_layers, sizeof(int));

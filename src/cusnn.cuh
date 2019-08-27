@@ -264,7 +264,7 @@ class Network {
         /* FUNCTIONS */
         Network(const int inp_size[3], const float inp_scale[2], const float sim_step, float node_refrac,
                 float synapse_trace_init, bool inhibition, bool drop_delays, float drop_delays_th,
-                const int histogram_type);
+                int histogram_type = 0);
         ~Network();
 
         void add_layer(std::string layer_type, bool learning, bool load_weights, bool homeostasis, float Vth,
