@@ -16,11 +16,14 @@ Estimation: From Events to Global Motion Perception*" (Paredes-Vallés, F., Sche
 If you use this library in an academic publication, please cite our work:
 
 ```
-@article{paredes2019unsupervised,
+@article{paredes2020unsupervised,
   title={Unsupervised Learning of a Hierarchical Spiking Neural Network for Optical Flow Estimation: From Events to Global Motion Perception},
   author={Paredes-Valles, Federico and Scheper, Kirk Yannick Willehm and De Croon, Guido Cornelis Henricus Eugene},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2019},
+  year={2020},
+  volume={42},
+  number={8},
+  pages={2051-2064},
   publisher={IEEE}
 }
 
